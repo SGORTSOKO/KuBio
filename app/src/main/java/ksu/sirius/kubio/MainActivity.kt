@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -127,15 +129,21 @@ fun MainWidget(){
 }
 @Composable
 fun ListItem(name: String,profession: String){
-    var counter = remember {
+    val counter = remember {
         mutableStateOf(0)
+    }
+    val color = remember {
+        mutableStateOf(Color.White)
     }
     Card(
         modifier = Modifier
             .padding(5.dp)
             .fillMaxWidth()
             .clickable {
-                       counter.value++
+                when ((++counter.value).mod(5)) {
+                    0 -> color.value = Color.White
+                    1 -> color.value = Color.Black
+                }
             },
         shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(5.dp)
@@ -157,6 +165,7 @@ fun ListItem(name: String,profession: String){
                 Column(
                     modifier = Modifier
                         .padding(start = 16.dp)
+                        .background(color.value)
                 ) {
                     Text(name)
                     Text(profession)
