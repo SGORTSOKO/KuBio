@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,7 +49,7 @@ fun MainWidget(){
     ){
         ListItem("Vlad", "Programmer")
         ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
+        ListItem("Artem", "ааа")
         ListItem("Artem", "Backender")
         ListItem("Artem", "Backender")
         ListItem("Artem", "Backender")
@@ -130,9 +132,12 @@ fun ListItem(name: String,profession: String){
         modifier = Modifier
             .padding(5.dp)
             .fillMaxWidth()
-            .clickable {
-                Log.d("MyLog", "Clicked")
-            },
+            .pointerInput(Unit){
+                               detectDragGesturesAfterLongPress { change, dragAmount ->
+                                   Log.d("MyLog", "LongPressnGesture: ${change.positionChange()}")
+                               }
+            }
+            ,
         shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(5.dp)
     ){
