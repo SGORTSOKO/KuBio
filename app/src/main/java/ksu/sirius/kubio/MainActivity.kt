@@ -1,6 +1,7 @@
 package ksu.sirius.kubio
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -140,10 +141,19 @@ fun ListItem(name: String,profession: String){
             .padding(5.dp)
             .fillMaxWidth()
             .clickable {
-                when ((++counter.value).mod(10)) {
-                    in 1..3 -> color.value = Color.White
-                    in 4..6 -> color.value = Color.Black
-                    else -> color.value = Color.Green
+                color.value = when (val innerNumber = (++counter.value).mod(10)) {
+                    in 1..3 -> {
+                        Log.d("MyLog", "1 - $innerNumber")
+                        Color.White
+                    }
+                    in 4..6 -> {
+                        Log.d("MyLog", "2 - $innerNumber")
+                        Color.Black
+                    }
+                    else -> {
+                        Log.d("MyLog", "3 - $innerNumber")
+                        Color.Green
+                    }
                 }
             },
         shape = RoundedCornerShape(15.dp),
