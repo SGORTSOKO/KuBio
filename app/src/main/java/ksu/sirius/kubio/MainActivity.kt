@@ -140,9 +140,10 @@ fun ListItem(name: String,profession: String){
             .padding(5.dp)
             .fillMaxWidth()
             .clickable {
-                when ((++counter.value).mod(5)) {
-                    0 -> color.value = Color.White
-                    1 -> color.value = Color.Black
+                when ((++counter.value).mod(10)) {
+                    in 1..3 -> color.value = Color.White
+                    in 4..6 -> color.value = Color.Black
+                    else -> color.value = Color.Green
                 }
             },
         shape = RoundedCornerShape(15.dp),
