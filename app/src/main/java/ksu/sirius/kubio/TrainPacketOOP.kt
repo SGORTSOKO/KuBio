@@ -1,4 +1,4 @@
-package ksu.sirius.kubio.ui.theme
+package ksu.sirius.kubio
 
 import android.util.Log
 import kotlin.reflect.KProperty
@@ -7,19 +7,19 @@ interface BaseTrainInterface{
     fun Go() : Int
 }
 
-interface TrainInterfaceFirst: BaseTrainInterface{
+interface TrainInterfaceFirst: BaseTrainInterface {
     override fun Go(): Int {
         return 1
     }
 }
 
-interface TrainInterfaceSecond: BaseTrainInterface{
+interface TrainInterfaceSecond: BaseTrainInterface {
     override fun Go(): Int {
         return 2
     }
 }
 
-interface TrainInterfaced: TrainInterfaceFirst, TrainInterfaceSecond{
+interface TrainInterfaced: TrainInterfaceFirst, TrainInterfaceSecond {
     override fun Go(): Int {
         var numbers = super<TrainInterfaceFirst>.Go()
         numbers += super<TrainInterfaceSecond>.Go()
@@ -128,7 +128,7 @@ class LoggerDelegate{
 }
 
 final class BaseTrainClassOverride(newInnerFieldValue: String = "_"):
-    BaseTrainClass(newInnerFieldValue), TrainInterfaced{
+    BaseTrainClass(newInnerFieldValue), TrainInterfaced {
     override var innerStringField: String by LoggerDelegate()
 
 }

@@ -7,13 +7,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -34,87 +35,37 @@ import ksu.sirius.kubio.R
 @Preview
 @Composable
 fun MainWidget(){
-    Column(
+    LazyColumn(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
     ){
-        ListItem("Vlad", "Programmer")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "ааа")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
-        ListItem("Artem", "Backender")
+        itemsIndexed(
+            listOf(
+                "Vlad" to "Programmer",
+                "Artem" to "Backeder",
+                "Vitaly" to "Frontender",
+                "1" to "Programmer",
+                "2" to "Backeder",
+                "3" to "Frontender",
+                "4" to "Programmer",
+                "5" to "Backeder",
+                "6" to "Frontender",
+                "7" to "Programmer",
+                "8" to "Backeder",
+                "9" to "Frontender",
+                "10" to "Programmer",
+                "11" to "Backeder",
+                "12" to "Frontender",
+                "13" to "Programmer",
+                "14" to "Backeder",
+                "15" to "Frontender",
+            )
+        ){index, item ->
+            ListItem(
+                name = item.first,
+                profession = item.second
+            )
+        }
     }
 }
 @Composable
@@ -135,10 +86,12 @@ fun ListItem(name: String,profession: String){
                         Log.d("MyLog", "1 - $innerNumber")
                         Color.White
                     }
+
                     in 4..6 -> {
                         Log.d("MyLog", "2 - $innerNumber")
                         Color.Black
                     }
+
                     else -> {
                         Log.d("MyLog", "3 - $innerNumber")
                         Color.Green
