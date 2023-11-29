@@ -1,6 +1,7 @@
 package ksu.sirius.kubio.ui.theme
 
 import android.util.Log
+import kotlin.reflect.KProperty
 
 interface BaseTrainInterface{
     fun Go() : Int
@@ -60,7 +61,7 @@ abstract class BaseTrainClass(innerStringField: String = ".") {
 
         Log.d("BaseTrainClass", message)
     }
-    var innerStringField: String = ""
+    open var innerStringField: String = ""
         set(newValue){
             when(newValue.length){
                 0 -> return
@@ -79,17 +80,17 @@ abstract class BaseTrainClass(innerStringField: String = ".") {
         }
     }
 
-    operator fun <T> plus (input: T): T where T: BaseTrainClass{
+    operator fun <T : BaseTrainClass> plus (input: T): T{
         return input::class.java.getConstructor(String::class.java)
             .newInstance(this.innerStringField + input.innerStringField) as T
     }
 
-    operator fun <T> inc (): T where T: BaseTrainClass{
+    operator fun <T : BaseTrainClass> inc (): T{
         return this::class.java.getConstructor(String::class.java)
             .newInstance(this.innerStringField + " ") as T
     }
 
-    operator fun <T> dec (): T where T: BaseTrainClass{
+    operator fun <T : BaseTrainClass> dec (): T{
         return this::class.java.getConstructor(String::class.java)
             .newInstance(
                 if (this.innerStringField.isNotEmpty())
@@ -100,9 +101,6 @@ abstract class BaseTrainClass(innerStringField: String = ".") {
     }
 }
 
-final class BaseTrainClassOverride(newInnerFieldValue: String = "_"):
-    BaseTrainClass(newInnerFieldValue), TrainInterfaced{
-}
 
 fun BaseTrainClass.symbolCount(symbol: Char) : Int{
     var count = 0
@@ -110,4 +108,27 @@ fun BaseTrainClass.symbolCount(symbol: Char) : Int{
         if(n == symbol) count++
     }
     return count
+}
+
+class LoggerDelegate{
+    operator fun <T : BaseTrainClass> getValue(thisRef: T, property: KProperty<*>): String {
+        val innerStringField = thisRef::class.java.getDeclaredField("innerStringField")
+        innerStringField.isAccessible = true
+        val gotValue = innerStringField.get(thisRef) as String
+        Log.d("LoggerDelegate", "Get $gotValue")
+        return gotValue
+    }
+    operator fun <T : BaseTrainClass> setValue(thisRef: T, property: KProperty<*>, value: String) {
+        val innerStringField = thisRef::class.java.getDeclaredField("innerStringField")
+        innerStringField.isAccessible = true
+        innerStringField.set(thisRef, value)
+        Log.d("LoggerDelegate", "Set $value")
+    }
+
+}
+
+final class BaseTrainClassOverride(newInnerFieldValue: String = "_"):
+    BaseTrainClass(newInnerFieldValue), TrainInterfaced{
+    override var innerStringField: String by LoggerDelegate()
+
 }
