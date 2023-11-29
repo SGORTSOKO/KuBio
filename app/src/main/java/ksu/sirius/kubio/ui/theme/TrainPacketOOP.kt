@@ -8,13 +8,13 @@ interface BaseTrainInterface{
 
 interface TrainInterfaceFirst: BaseTrainInterface{
     override fun Go(): Int {
-        return 0
+        return 1
     }
 }
 
 interface TrainInterfaceSecond: BaseTrainInterface{
     override fun Go(): Int {
-        return 1
+        return 2
     }
 }
 
@@ -72,8 +72,42 @@ abstract class BaseTrainClass(innerStringField: String = ".") {
         get(){
             return "Value: $field"
         }
+    operator fun contains(input: String): Boolean{
+        return when (input in innerStringField){
+            true -> true
+            false-> false
+        }
+    }
+
+    operator fun <T> plus (input: T): T where T: BaseTrainClass{
+        return input::class.java.getConstructor(String::class.java)
+            .newInstance(this.innerStringField + input.innerStringField) as T
+    }
+
+    operator fun <T> inc (): T where T: BaseTrainClass{
+        return this::class.java.getConstructor(String::class.java)
+            .newInstance(this.innerStringField + " ") as T
+    }
+
+    operator fun <T> dec (): T where T: BaseTrainClass{
+        return this::class.java.getConstructor(String::class.java)
+            .newInstance(
+                if (this.innerStringField.isNotEmpty())
+                    this.innerStringField
+                        .substring(0, this.innerStringField.length - 1)
+                else this.innerStringField
+            ) as T
+    }
 }
 
 final class BaseTrainClassOverride(newInnerFieldValue: String = "_"):
     BaseTrainClass(newInnerFieldValue), TrainInterfaced{
+}
+
+fun BaseTrainClass.symbolCount(symbol: Char) : Int{
+    var count = 0
+    for(n in this.innerStringField){
+        if(n == symbol) count++
+    }
+    return count
 }
