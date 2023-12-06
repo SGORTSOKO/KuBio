@@ -26,6 +26,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import ksu.sirius.kubio.ui.theme.KuBioTheme
+import org.json.JSONObject
 
 
 @Composable
@@ -35,7 +36,7 @@ fun SecondWidget(context: Context){
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ){
-            SecondGreeting("London", context)
+            SecondGreeting("Rome", context)
         }
     }
 }
@@ -52,7 +53,7 @@ fun SecondGreeting(name: String, context: Context){
             .background(color = Color.Gray),
             contentAlignment = Alignment.Center
         ){
-            Text(text = "Temp in $name = ${state.value}")
+            Text(text = "Temp in $name = ${state.value} C")
         }
         Box(modifier = Modifier
             .fillMaxHeight()
@@ -82,7 +83,8 @@ private fun getResult(city: String, state: MutableState<String>, context: Contex
         url,
         {
             response ->
-            state.value = response
+            val obj = JSONObject(response)
+            state.value = obj.getJSONObject("current").getString("temp_c")
         },
         {
             error ->
