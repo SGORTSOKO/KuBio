@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ItemRow(item: ItemRowModel) {
-    var isExpanded by remember{
+    var isExpanded by remember {
         mutableStateOf(false)
     }
     val counter = remember {
@@ -63,12 +63,12 @@ fun ItemRow(item: ItemRowModel) {
             },
         shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(5.dp)
-    ){
+    ) {
         Box(
-        ){
+        ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
-            ){
+            ) {
                 Image(
                     painter = painterResource(id = item.imageId),
                     contentDescription = "Photo",
@@ -84,11 +84,13 @@ fun ItemRow(item: ItemRowModel) {
                         .background(color.value)
                 ) {
                     Text(item.name)
-                    Text(modifier = Modifier.clickable {
+                    Text(
+                        modifier = Modifier.clickable {
                             isExpanded = !isExpanded
                         },
                         maxLines = if (isExpanded) Int.MAX_VALUE else 1,
-                        text = item.profession)
+                        text = item.profession
+                    )
                     Text(counter.value.toString())
                 }
             }

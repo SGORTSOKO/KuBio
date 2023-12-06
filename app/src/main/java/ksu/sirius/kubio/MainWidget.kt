@@ -10,68 +10,26 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun MainWidget(){
+fun MainWidget() {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-    ){
+    ) {
         itemsIndexed(
             listOf(
-                ItemRowModel(name = "Vlad", profession = "Programmer \n" +
-                        "programmer \n"+ "programmer \n"+
-                        "programmer \n"+ "programmer \n"+
-                        "programmer \n"+ "programmer \n"+
-                        "programmer \n"+ "programmer \n"+
-                        "programmer \n"+ "programmer \n"+
-                        "programmer \n"+ "programmer \n"+
-                        "programmer \n"+ "programmer \n"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
-                ItemRowModel(name = "Vlad", profession = "Programmer"),
+                ItemRowModel(
+                    name = "Vlad", profession = "Programmer \n" +
+                            "programmer \n" + "programmer \n" +
+                            "programmer \n" + "programmer \n" +
+                            "programmer \n" + "programmer \n" +
+                            "programmer \n" + "programmer \n" +
+                            "programmer \n" + "programmer \n" +
+                            "programmer \n" + "programmer \n" +
+                            "programmer \n" + "programmer \n"
+                ),
+                ItemRowModel(name = "Vlad", profession = "Programmer")
             )
-        ){index, item ->
+        ) { index, item ->
             item.count = index
             ItemRow(item)
         }

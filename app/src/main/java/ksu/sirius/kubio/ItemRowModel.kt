@@ -7,5 +7,5 @@ data class ItemRowModel(
     val name: String = "Base name",
     val profession: String = "Base profession",
     var count: Int = 0,
-    var color:Color = Color.White
+    var color: Color = Color.White
 )

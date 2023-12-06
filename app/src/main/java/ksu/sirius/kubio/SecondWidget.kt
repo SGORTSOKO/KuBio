@@ -1,4 +1,3 @@
-
 package ksu.sirius.kubio
 
 import android.content.Context
@@ -28,51 +27,56 @@ import com.android.volley.toolbox.Volley
 import ksu.sirius.kubio.ui.theme.KuBioTheme
 import org.json.JSONObject
 
+const val API_KEY = "6d52473eea504095a1a51156230612"
 
 @Composable
-fun SecondWidget(context: Context){
+fun SecondWidget(context: Context) {
     KuBioTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
-        ){
+        ) {
             SecondGreeting("Rome", context)
         }
     }
 }
 
 @Composable
-fun SecondGreeting(name: String, context: Context){
+fun SecondGreeting(name: String, context: Context) {
     val state = remember {
         mutableStateOf("Unknown")
     }
-    Column (modifier = Modifier.fillMaxSize()) {
-        Box(modifier = Modifier
-            .fillMaxHeight(0.5f)
-            .fillMaxWidth()
-            .background(color = Color.Gray),
+    Column(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(0.5f)
+                .fillMaxWidth()
+                .background(color = Color.Gray),
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Text(text = "Temp in $name = ${state.value} C")
         }
-        Box(modifier = Modifier
-            .fillMaxHeight()
-            .fillMaxWidth()
-            .background(color = Color.Blue),
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
+                .background(color = Color.Blue),
             contentAlignment = Alignment.BottomCenter
-        ){
-            Button(onClick = {
-                getResult(name, state, context)
-            }, modifier = Modifier
-                .padding(5.dp)
-                .fillMaxWidth()) {
+        ) {
+            Button(
+                onClick = {
+                    getResult(name, state, context)
+                }, modifier = Modifier
+                    .padding(5.dp)
+                    .fillMaxWidth()
+            ) {
                 Text(text = "Refresh")
             }
         }
     }
 }
 
-private fun getResult(city: String, state: MutableState<String>, context: Context){
+private fun getResult(city: String, state: MutableState<String>, context: Context) {
     val url = "http://api.weatherapi.com/v1/current.json" +
             "?key=$API_KEY&" +
             "q=$city" +
@@ -81,13 +85,11 @@ private fun getResult(city: String, state: MutableState<String>, context: Contex
     val stringRequest = StringRequest(
         Request.Method.GET,
         url,
-        {
-            response ->
+        { response ->
             val obj = JSONObject(response)
             state.value = obj.getJSONObject("current").getString("temp_c")
         },
-        {
-            error ->
+        { error ->
             Log.d("MyLog", "Error $error")
         }
     )
